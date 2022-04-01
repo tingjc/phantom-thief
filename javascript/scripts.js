@@ -20,3 +20,11 @@
 // ---- medium, 
 // ---- link to moma/wiki entry
 // -- display element on page
+
+const galleryApp = {};
+
+galleryApp.init = function() {
+    console.log("Hello")
+}
+
+galleryApp.init();
