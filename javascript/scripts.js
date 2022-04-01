@@ -39,7 +39,8 @@ const url = new URL('https://collectionapi.metmuseum.org/public/collection/v1/se
         console.log(url);
         
 
-
+//create a blank array to filter galleryApp.response
+galleryApp.sampleArray = []
 
 //This is the function that makes the call
 galleryApp.apiCall = function() {
@@ -47,8 +48,40 @@ galleryApp.apiCall = function() {
     return response.json();
     //this returns a json of objectIDs
 }).then(function(jsonResponse) {
-    galleryApp.response = jsonResponse.objectIDs;
-    console.log(galleryApp.response);
+    //only get the first 20 IDs from the list
+    galleryApp.response = jsonResponse.objectIDs.slice(0, 20);
+
+
+    //filtering galleryApp.response
+    galleryApp.response.forEach((item) => {
+        
+        //make a call to the individual object api
+        fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${item}`).then(function(response) {
+            return response.json();
+        }).then(function(jsonResponse) {
+            
+            //check if the individual object has an image
+            if (jsonResponse.primaryImage) {
+                //if true, add it to sampleArray
+                galleryApp.sampleArray.push(
+                    {
+                        title: jsonResponse.title,
+                        artist: jsonResponse.artistDisplayName,
+                        src: jsonResponse.primaryImageSmall,
+                        medium: jsonResponse.medium,
+                    })
+                    console.log(galleryApp.sampleArray.length)
+                } //if condition END
+                galleryApp.sampleArray.forEach((item) => {
+                    galleryApp.display(item);
+                })
+
+            }
+        )
+    })//end galleryApp.response forEach
+
+    
+
 
     // To show the object, the url =  https://collectionapi.metmuseum.org/public/collection/v1/objects/[objectID]
     const first = jsonResponse.objectIDs[0];
@@ -57,26 +90,28 @@ galleryApp.apiCall = function() {
     console.log(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${second}`);
 
 })
-};
+}; //galleryApp.apiCall END
 
 
 
 
-galleryApp.display = function(objectId) {
+galleryApp.display = function(array) {
     const resultsUl = document.querySelector('.results')
-    resultsUl.innerHTML = "";
+    // resultsUl.innerHTML = "";
+    //commented above line out to not erase each item
 
     //creating li
     const entryLi = document.createElement('li')
     //create image
     const image = document.createElement('img')
-    image.src = objectId.primaryImage
+    image.src = array.src
+    console.log(array.src);
     //alt text needed
-    entryLi.appendChild(image)
+    entryLi.appendChild(image);
 
-    resultsUl.appendChild(entryLi)
+    resultsUl.appendChild(entryLi);
 
-    console.log(objectId.primaryImage)
+    
 }
 
 const searchButton = document.querySelector('button');
