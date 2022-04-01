@@ -39,23 +39,28 @@ const url = new URL('https://collectionapi.metmuseum.org/public/collection/v1/se
         console.log(url);
         
 
+
+
 //This is the function that makes the call
 galleryApp.apiCall = function() {
     fetch(url).then(function(response) {
     return response.json();
     //this returns a json of objectIDs
 }).then(function(jsonResponse) {
-    console.log(jsonResponse);
+    galleryApp.response = jsonResponse.objectIDs;
+    console.log(galleryApp.response);
 
     // To show the object, the url =  https://collectionapi.metmuseum.org/public/collection/v1/objects/[objectID]
     const first = jsonResponse.objectIDs[0];
     const second = jsonResponse.objectIDs[1];
-    galleryApp.display(first)
     console.log(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${first}`);
     console.log(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${second}`);
 
 })
 };
+
+
+
 
 galleryApp.display = function(objectId) {
     const resultsUl = document.querySelector('.results')
