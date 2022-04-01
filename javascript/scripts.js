@@ -46,20 +46,45 @@ galleryApp.apiCall = function() {
     //this returns a json of objectIDs
 }).then(function(jsonResponse) {
     console.log(jsonResponse);
-    
 
     // To show the object, the url =  https://collectionapi.metmuseum.org/public/collection/v1/objects/[objectID]
     const first = jsonResponse.objectIDs[0];
     const second = jsonResponse.objectIDs[1];
+    galleryApp.display(first)
     console.log(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${first}`);
     console.log(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${second}`);
 
 })
 };
 
+galleryApp.display = function(objectId) {
+    const resultsUl = document.querySelector('.results')
+    resultsUl.innerHTML = "";
+
+    //creating li
+    const entryLi = document.createElement('li')
+    //create image
+    const image = document.createElement('img')
+    image.src = objectId.primaryImage
+    //alt text needed
+    entryLi.appendChild(image)
+
+    resultsUl.appendChild(entryLi)
+
+    console.log(objectId.primaryImage)
+}
+
+const searchButton = document.querySelector('button');
+
+galleryApp.startSearch = function() {
+    searchButton.addEventListener('click', function() {
+        galleryApp.apiCall()
+    }) 
+}
+
 galleryApp.init = function() {
+    galleryApp.startSearch();
     console.log("Hello")
-    galleryApp.apiCall();
 }
 
 galleryApp.init();
