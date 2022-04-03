@@ -17,10 +17,7 @@ galleryApp.getObject = () =>
         return response.json();
     }).then(function (jsonResponse) {
         galleryApp.displayObject(jsonResponse);
-
-
-
-        
+ 
     })
 
 
@@ -66,19 +63,49 @@ galleryApp.displayObject = (item) => {
                         })
                     // console.log(galleryApp.sampleArray.length)
                 } //if condition END
+                
             })
         })
-    console.log(galleryApp.sampleArray)
+        console.log(galleryApp.sampleArray)
+        galleryApp.sampleArray.forEach((item) => {
+            galleryApp.display(item);
+        })
+}
+
+// galleryApp.displayURL = (datum) => {
+
+// }
+
+galleryApp.display = function (array) {
+    const resultsUl = document.querySelector('.results')
+    // resultsUl.innerHTML = "";
+    //commented above line out to not erase each item
+
+    //creating li
+    const entryLi = document.createElement('li')
+    //create image
+    const image = document.createElement('img')
+    image.src = array.src
+    console.log(array.src);
+    //alt text needed
+    entryLi.appendChild(image);
+
+    resultsUl.appendChild(entryLi);
 
 
 }
 
-galleryApp.displayURL = (datum) => {
-    console.log(datum)
+const searchButton = document.querySelector('button');
+
+galleryApp.startSearch = function () {
+    searchButton.addEventListener('click', function () {
+        galleryApp.getObject()
+    })
 }
 
 galleryApp.init = () => {
-    galleryApp.getObject();
+    galleryApp.startSearch();
+    galleryApp.display();
     // galleryApp.getURL();
 }
 
