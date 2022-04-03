@@ -31,7 +31,7 @@ const galleryApp = {};
 const url = new URL('https://collectionapi.metmuseum.org/public/collection/v1/search')
         url.search = new URLSearchParams(
             {
-                q : "sunflowers",
+                q : "hearts",
                 
             }
         )
@@ -41,6 +41,7 @@ const url = new URL('https://collectionapi.metmuseum.org/public/collection/v1/se
 
 //create a blank array to filter galleryApp.response
 galleryApp.sampleArray = []
+console.log(galleryApp.sampleArray)
 
 //This is the function that makes the call
 galleryApp.apiCall = function() {
@@ -48,20 +49,24 @@ galleryApp.apiCall = function() {
     return response.json();
     //this returns a json of objectIDs
 }).then(function(jsonResponse) {
+
+    console.log(galleryApp.apiCall)
     //only get the first 20 IDs from the list
-    galleryApp.response = jsonResponse.objectIDs.slice(0, 20);
+    galleryApp.response = jsonResponse.objectIDs.slice(0, 4);
+
 
 
     //filtering galleryApp.response
-    galleryApp.response.forEach((item) => {
-        
+    galleryApp.response.forEach((a) => {
+        console.log(galleryApp.response)
         //make a call to the individual object api
-        fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${item}`).then(function(response) {
+        fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${a}`).then(function(response) {
             return response.json();
         }).then(function(jsonResponse) {
-            
+            console.log(jsonResponse)
             //check if the individual object has an image
             if (jsonResponse.primaryImage) {
+                // console.log(jsonResponse.primaryImage)
                 //if true, add it to sampleArray
                 galleryApp.sampleArray.push(
                     {
@@ -72,22 +77,22 @@ galleryApp.apiCall = function() {
                     })
                     console.log(galleryApp.sampleArray.length)
                 } //if condition END
-                galleryApp.sampleArray.forEach((item) => {
-                    galleryApp.display(item);
-                })
-
+            galleryApp.sampleArray.forEach((item) => {
+                galleryApp.display(item);
+            })
             }
+            
         )
     })//end galleryApp.response forEach
 
     
 
 
-    // To show the object, the url =  https://collectionapi.metmuseum.org/public/collection/v1/objects/[objectID]
-    const first = jsonResponse.objectIDs[0];
-    const second = jsonResponse.objectIDs[1];
-    console.log(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${first}`);
-    console.log(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${second}`);
+    // // To show the object, the url =  https://collectionapi.metmuseum.org/public/collection/v1/objects/[objectID]
+    // const first = jsonResponse.objectIDs[0];
+    // const second = jsonResponse.objectIDs[1];
+    // console.log(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${first}`);
+    // console.log(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${second}`);
 
 })
 }; //galleryApp.apiCall END
