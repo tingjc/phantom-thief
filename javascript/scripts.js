@@ -28,28 +28,59 @@
 
 const galleryApp = {};
 
-const galleryURL = new URL("https://collectionapi.metmuseum.org/public/collection/v1/objects");
+//create event for form submission aka button click
+galleryApp.buttonClick = function() {
+    const selectButton = document.querySelector("button");
+    selectButton.addEventListener('click', function() {
+        const optionSelect = document.querySelector("select");
+        const departmentValue = optionSelect.value
 
-galleryURL.search = new URLSearchParams(
+        galleryApp.url = new URL("https://collectionapi.metmuseum.org/public/collection/v1/search");
+
+        galleryApp.url.search = new URLSearchParams(
     {
-        departmentIds: 1
+        q: "",
+        departmentId: departmentValue,
+        isOnView: true
+
 
     }
 )
+    galleryApp.IDcall();
+    })
+} // .buttonClick END
+
 
 galleryApp.IDcall = function() {
-    fetch(galleryURL)
+    fetch(galleryApp.url)
     .then( function(response) {
         return response.json();
     })
     .then(function(jsonData) {
-        console.log(jsonData); 
+        console.log("our response data", jsonData); 
         // this gives an object of an array of objectIDs
-        const arrayList = jsonData.objectIDs.slice(0, 30);
-        console.log(arrayList);
-        
+        galleryApp.arrayList = jsonData.objectIDs.slice(0, 30);
+        return galleryApp.arrayList
+    })
+    .then(function() {
+        console.log("our sliced array", galleryApp.arrayList);
+        //create loop to call individual object APIs
+        galleryApp.arrayList.forEach(function(id){
+            
+            fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`)
+            .then( function(response) {
+                return response.json()
+            })
+            .then(function(jsonData) {
+                console.log(jsonData);
+            })
+        })
     })
 }; //galleryApp.IDcall END
+
+//create object display function
+// display function requires a separate call to individual object APIs
+
 
 //Populating Dropdown Menu with Department Name
 // // make function to call departments API
@@ -73,7 +104,7 @@ galleryApp.departmentDisplay = function (jsonObject) {
     
     departmentArray.forEach( function(departmentNumber) {
         const newOption = document.createElement("option");
-        newOption.value = departmentNumber.displayName;
+        newOption.value = departmentNumber.departmentId;
         newOption.innerText = departmentNumber.displayName;
         selectDropdown.append(newOption);
     })
@@ -84,8 +115,9 @@ galleryApp.departmentDisplay = function (jsonObject) {
 
 galleryApp.init = function() {
     console.log("Hello");
-    galleryApp.IDcall(); // should only happen at button click
     galleryApp.departmentCall();
+    galleryApp.buttonClick();
+
 }
 
 galleryApp.init();
