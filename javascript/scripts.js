@@ -28,12 +28,20 @@
 
 const galleryApp = {};
 
+const ul = document.querySelector('.results')
+
 //create event for form submission aka button click
 galleryApp.buttonClick = function() {
     const selectButton = document.querySelector("button");
     selectButton.addEventListener('click', function() {
+        ul.innerHTML = "";
+
         const optionSelect = document.querySelector("select");
         const departmentValue = optionSelect.value
+
+        // const h2 = document.querySelector('h2')
+
+        // console.log(optionSelect)
 
         galleryApp.url = new URL("https://collectionapi.metmuseum.org/public/collection/v1/search");
 
@@ -59,14 +67,15 @@ galleryApp.IDcall = function() {
     .then(function(jsonData) {
         console.log("our response data", jsonData); 
         // this gives an object of an array of objectIDs
-        galleryApp.arrayList = jsonData.objectIDs.slice(0, 30);
+        galleryApp.arrayList = jsonData.objectIDs.slice(0, 12);
         return galleryApp.arrayList
     })
     .then(function() {
         console.log("our sliced array", galleryApp.arrayList);
         //create loop to call individual object APIs
         // push them into empty array
-        galleryApp.displayList = []
+        // galleryApp.displayList = []
+
         galleryApp.arrayList.forEach(function(id){
             
             fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`)
@@ -76,13 +85,37 @@ galleryApp.IDcall = function() {
             })
             .then(function(jsonData) {
                 console.log(jsonData)
-                galleryApp.displayList.push(jsonData);
+                galleryApp.displayImg(jsonData);
+                // galleryApp.displayList.push(jsonData);
             })
         })//arrayList.loop END
-        console.log("list to be displayed", galleryApp.displayList);
+        // console.log("list to be displayed", galleryApp.displayList);
     })
 }; //galleryApp.IDcall END
 
+galleryApp.displayImg = function(option) {
+
+    let titleCut = option.title;
+
+    if (titleCut.length > 30){
+        titleCut = titleCut.slice(0, 30) + "[...]";
+    }
+
+    const li = document.createElement('li')
+    li.innerHTML = 
+    `
+    <div class="containerimg">
+        <img src="${option.primaryImageSmall}" alt="${option.title} by ${option.artistDisplayName}">
+    </div>
+    <h4>${titleCut}</h4>
+
+    <p>${option.artistDisplayName}</p>
+    <a href="${option.objectURL}"><p>Link to the museum</p></a> 
+    `
+
+    ul.appendChild(li)
+
+}
 //create object display function
 // display function requires a separate call to individual object APIs
 
