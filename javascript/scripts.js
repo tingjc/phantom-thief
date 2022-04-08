@@ -65,16 +65,21 @@ galleryApp.IDcall = function() {
     .then(function() {
         console.log("our sliced array", galleryApp.arrayList);
         //create loop to call individual object APIs
+        // push them into empty array
+        galleryApp.displayList = []
         galleryApp.arrayList.forEach(function(id){
             
             fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`)
             .then( function(response) {
                 return response.json()
+
             })
             .then(function(jsonData) {
-                console.log(jsonData);
+                console.log(jsonData)
+                galleryApp.displayList.push(jsonData);
             })
-        })
+        })//arrayList.loop END
+        console.log("list to be displayed", galleryApp.displayList);
     })
 }; //galleryApp.IDcall END
 
