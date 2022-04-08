@@ -3,3 +3,48 @@
 //line height
 //letter spacing
 //font family
+
+html {
+    font-size: 125%;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    background-color: $black;
+    max-width: 2500px;
+    margin: 0 auto;
+}
+
+h1 {
+    font-size: 4rem;
+    font-weight: 900;
+    color: $white;
+    text-transform: uppercase;
+}
+
+// blog and contact title
+h2 {
+    font-size: 4.35rem;
+    letter-spacing: 0.45rem;
+    color: $white;
+}
+
+//welcome to
+h3 {
+    line-height: 1.6rem;
+    letter-spacing: 0.1rem;
+    color: $darkgrey;
+}
+
+h4 {
+    font-size: 1.75rem;
+    letter-spacing: 0.19rem;
+    color: $white;
+}
+
+p {
+    line-height: 1.6rem;
+    letter-spacing: 0.1rem;
+    font-weight: 400;
+}
