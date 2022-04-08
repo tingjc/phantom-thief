@@ -28,108 +28,64 @@
 
 const galleryApp = {};
 
-const url = new URL('https://collectionapi.metmuseum.org/public/collection/v1/search')
-        url.search = new URLSearchParams(
-            {
-                q : "hearts",
-                
-            }
-        )
+const galleryURL = new URL("https://collectionapi.metmuseum.org/public/collection/v1/objects");
 
-        console.log(url);
+galleryURL.search = new URLSearchParams(
+    {
+        departmentIds: 1
+
+    }
+)
+
+galleryApp.IDcall = function() {
+    fetch(galleryURL)
+    .then( function(response) {
+        return response.json();
+    })
+    .then(function(jsonData) {
+        console.log(jsonData); 
+        // this gives an object of an array of objectIDs
+        const arrayList = jsonData.objectIDs.slice(0, 30);
+        console.log(arrayList);
         
+    })
+}; //galleryApp.IDcall END
 
-//create a blank array to filter galleryApp.response
-galleryApp.sampleArray = []
-console.log(galleryApp.sampleArray)
+//Populating Dropdown Menu with Department Name
+// // make function to call departments API
+galleryApp.departmentCall = function() {
+    const departmentURL = "https://collectionapi.metmuseum.org/public/collection/v1/departments";
 
-//This is the function that makes the call
-galleryApp.apiCall = function() {
-    fetch(url).then(function(response) {
-    return response.json();
-    //this returns a json of objectIDs
-}).then(function(jsonResponse) {
-
-    console.log(galleryApp.apiCall)
-    //only get the first 20 IDs from the list
-    galleryApp.response = jsonResponse.objectIDs.slice(0, 4);
-
-
-
-    //filtering galleryApp.response
-    galleryApp.response.forEach((a) => {
-        console.log(galleryApp.response)
-        //make a call to the individual object api
-        fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${a}`).then(function(response) {
-            return response.json();
-        }).then(function(jsonResponse) {
-            console.log(jsonResponse)
-            //check if the individual object has an image
-            if (jsonResponse.primaryImage) {
-                // console.log(jsonResponse.primaryImage)
-                //if true, add it to sampleArray
-                galleryApp.sampleArray.push(
-                    {
-                        title: jsonResponse.title,
-                        artist: jsonResponse.artistDisplayName,
-                        src: jsonResponse.primaryImageSmall,
-                        medium: jsonResponse.medium,
-                    })
-                    console.log(galleryApp.sampleArray.length)
-                } //if condition END
-            galleryApp.sampleArray.forEach((item) => {
-                galleryApp.display(item);
-            })
-            }
-            
-        )
-    })//end galleryApp.response forEach
-
+    fetch(departmentURL)
+    .then( function(response) {
+        return response.json();
+    })
+    .then( function(jsonData) {
+        galleryApp.departmentDisplay(jsonData);
+    })
     
+}// departmentCall END
 
-
-    // // To show the object, the url =  https://collectionapi.metmuseum.org/public/collection/v1/objects/[objectID]
-    // const first = jsonResponse.objectIDs[0];
-    // const second = jsonResponse.objectIDs[1];
-    // console.log(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${first}`);
-    // console.log(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${second}`);
-
-})
-}; //galleryApp.apiCall END
-
-
-
-
-galleryApp.display = function(array) {
-    const resultsUl = document.querySelector('.results')
-    // resultsUl.innerHTML = "";
-    //commented above line out to not erase each item
-
-    //creating li
-    const entryLi = document.createElement('li')
-    //create image
-    const image = document.createElement('img')
-    image.src = array.src
-    console.log(array.src);
-    //alt text needed
-    entryLi.appendChild(image);
-
-    resultsUl.appendChild(entryLi);
-
+// Create function to display department names in dropdown
+galleryApp.departmentDisplay = function (jsonObject) {
+    const departmentArray = jsonObject.departments;
+    const selectDropdown = document.querySelector("#dropdown");
     
+    departmentArray.forEach( function(departmentNumber) {
+        const newOption = document.createElement("option");
+        newOption.value = departmentNumber.displayName;
+        newOption.innerText = departmentNumber.displayName;
+        selectDropdown.append(newOption);
+    })
+
 }
 
-const searchButton = document.querySelector('button');
 
-galleryApp.startSearch = function() {
-    searchButton.addEventListener('click', function() {
-        galleryApp.apiCall()
-    }) 
-}
 
 galleryApp.init = function() {
-    galleryApp.startSearch();
-    console.log("Hello")
+    console.log("Hello");
+    galleryApp.IDcall(); // should only happen at button click
+    galleryApp.departmentCall();
 }
 
 galleryApp.init();
