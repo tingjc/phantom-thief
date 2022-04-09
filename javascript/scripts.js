@@ -34,14 +34,14 @@ const ul = document.querySelector('.results')
 galleryApp.buttonClick = function() {
     const selectButton = document.querySelector("button");
     selectButton.addEventListener('click', function() {
-        ul.innerHTML = "";
 
         const optionSelect = document.querySelector("select");
         const departmentValue = optionSelect.value
 
-        // const h2 = document.querySelector('h2')
+        const h2 = document.querySelector('h2')
+        h2.innerText = optionSelect.selectedOptions[0].innerText
 
-        // console.log(optionSelect)
+        ul.innerHTML = "";
 
         galleryApp.url = new URL("https://collectionapi.metmuseum.org/public/collection/v1/search");
 
@@ -68,6 +68,7 @@ galleryApp.IDcall = function() {
         console.log("our response data", jsonData); 
         // this gives an object of an array of objectIDs
         galleryApp.arrayList = jsonData.objectIDs.slice(0, 12);
+        
         return galleryApp.arrayList
     })
     .then(function() {
@@ -76,15 +77,18 @@ galleryApp.IDcall = function() {
         // push them into empty array
         // galleryApp.displayList = []
 
+        
         galleryApp.arrayList.forEach(function(id){
             
             fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`)
             .then( function(response) {
+                
                 return response.json()
+                
 
             })
             .then(function(jsonData) {
-                console.log(jsonData)
+                console.log("data", jsonData)
                 galleryApp.displayImg(jsonData);
                 // galleryApp.displayList.push(jsonData);
             })
@@ -94,6 +98,7 @@ galleryApp.IDcall = function() {
 }; //galleryApp.IDcall END
 
 galleryApp.displayImg = function(option) {
+    
 
     let titleCut = option.title;
 
@@ -140,7 +145,9 @@ galleryApp.departmentDisplay = function (jsonObject) {
     const departmentArray = jsonObject.departments;
     const selectDropdown = document.querySelector("#dropdown");
     
+    
     departmentArray.forEach( function(departmentNumber) {
+        
         const newOption = document.createElement("option");
         newOption.value = departmentNumber.departmentId;
         newOption.innerText = departmentNumber.displayName;
