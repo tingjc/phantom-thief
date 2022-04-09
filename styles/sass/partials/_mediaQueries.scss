@@ -12,8 +12,17 @@
 // ipad portrait
 @media (max-width: 810px) {
 
+
     li {
         width: calc(80% - 60px);
     }
 
 } // query end
+
+// phone portrait
+@media (max-width: 500px) {
+    .results h4 {
+        font-size: 1rem;
+    }
+
+} //query end

@@ -448,3 +448,8 @@ footer p {
     width: calc(80% - 60px);
   }
 }
+@media (max-width: 500px) {
+  .results h4 {
+    font-size: 1rem;
+  }
+}
