@@ -9,8 +9,8 @@
 
 } // query end
 
-// ipad portrait
-@media (max-width: 810px) {
+// ipad portrait, pro max and ultra landscape
+@media (max-width: 930px) {
 
 
     li {
@@ -21,8 +21,25 @@
 
 // phone portrait
 @media (max-width: 500px) {
-    .results h4 {
-        font-size: 1rem;
+    html {
+        font-size: 100%;
+    }
+
+    h1 {
+        font-size: 3rem;
+    }
+
+    .results li {
+        width: 95%;
+
+        .containerimg {
+            width: 100%;
+            padding: 20px 5px 5px 5px;
+        }
+        
+        h4 {
+            font-size: 1.25rem;
+        }
     }
 
 } //query end
