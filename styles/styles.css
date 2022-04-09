@@ -443,8 +443,28 @@ footer p {
     background-position: 60%;
   }
 }
-@media (max-width: 810px) {
+@media (max-width: 930px) {
   li {
     width: calc(80% - 60px);
+  }
+}
+@media (max-width: 500px) {
+  html {
+    font-size: 100%;
+  }
+
+  h1 {
+    font-size: 3rem;
+  }
+
+  .results li {
+    width: 95%;
+  }
+  .results li .containerimg {
+    width: 100%;
+    padding: 20px 5px 5px 5px;
+  }
+  .results li h4 {
+    font-size: 1.25rem;
   }
 }
