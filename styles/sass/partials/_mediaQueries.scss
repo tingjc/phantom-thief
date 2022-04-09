@@ -1,0 +1,19 @@
+// ipad 810x1080 landscape
+@media (max-width: 1080px) {
+    h1 {
+        font-size: 3.5rem;
+    }
+    .headerimg {
+        background-position: 60%;
+    }
+
+} // query end
+
+// ipad portrait
+@media (max-width: 810px) {
+
+    li {
+        width: calc(80% - 60px);
+    }
+
+} // query end
