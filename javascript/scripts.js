@@ -35,7 +35,7 @@ const ul = document.querySelector('.results')
 galleryApp.buttonClick = function() {
     const selectButton = document.querySelector("button");
     selectButton.addEventListener('click', function() {
-
+      
         error.textContent = ("")
 
         const optionSelect = document.querySelector("select");
@@ -95,7 +95,6 @@ galleryApp.IDcall = function() {
             fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`)
             .then( function(response) {
                 return response.json()  
-
             })
             .then(function(jsonData) {
                 galleryApp.displayImg(jsonData);
@@ -179,17 +178,13 @@ galleryApp.departmentDisplay = function (jsonObject) {
     const departmentArray = jsonObject.departments;
     const selectDropdown = document.querySelector("#dropdown");
     
-    
-    
     departmentArray.forEach(function(departmentNumber) {
         
         const newOption = document.createElement("option");
         newOption.value = departmentNumber.departmentId;
         newOption.innerText = departmentNumber.displayName;
-        selectDropdown.append(newOption);
-        
+        selectDropdown.append(newOption); 
     })
-
 }
 
 
