@@ -265,11 +265,15 @@ html {
 }
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: "Lato", sans-serif;
   font-size: 1rem;
   background-color: #151515;
   max-width: 2500px;
   margin: 0 auto;
+}
+
+h1, h2, h3, h4 {
+  font-family: "Work Sans", sans-serif;
 }
 
 h1 {
@@ -281,7 +285,7 @@ h1 {
 
 h2 {
   font-size: 4.35rem;
-  letter-spacing: 0.45rem;
+  letter-spacing: 0.2rem;
   color: #FFFFFF;
 }
 
@@ -293,14 +297,14 @@ h3 {
 
 h4 {
   font-size: 1.75rem;
-  letter-spacing: 0.19rem;
+  letter-spacing: 0.1rem;
   color: #FFFFFF;
 }
 
 p {
   line-height: 1.6rem;
-  letter-spacing: 0.1rem;
-  font-weight: 400;
+  letter-spacing: 0.05rem;
+  font-weight: 300;
 }
 
 *, h1 {
@@ -406,10 +410,10 @@ li p {
 }
 li a p {
   color: #FABA63;
+  font-style: italic;
 }
 
 .containerimg {
-  width: 90%;
   height: auto;
   padding: 20px;
 }
@@ -418,6 +422,10 @@ li a p {
   height: auto;
   -o-object-fit: contain;
      object-fit: contain;
+}
+
+.headerTwo p {
+  color: #FABA63;
 }
 
 h4 {
@@ -439,6 +447,10 @@ footer p {
     font-size: 3.5rem;
   }
 
+  h2 {
+    font-size: 3rem;
+  }
+
   .headerimg {
     background-position: 60%;
   }
@@ -453,18 +465,49 @@ footer p {
     font-size: 100%;
   }
 
+  .headerimg {
+    background-image: none;
+  }
+
+  .wrapper {
+    width: 90%;
+  }
+
+  .leftSide {
+    width: 100%;
+    text-align: center;
+  }
+  .leftSide p {
+    width: 100%;
+  }
+
   h1 {
     font-size: 3rem;
   }
 
-  .results li {
-    width: 95%;
+  h2 {
+    font-size: 2.5rem;
   }
-  .results li .containerimg {
+
+  select {
+    width: 100%;
+  }
+
+  li {
+    border: 1px solid #FABA63;
+    width: 95%;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+  }
+  li .containerimg {
     width: 100%;
     padding: 20px 5px 5px 5px;
   }
-  .results li h4 {
+  li .containerimg img {
+    width: 80%;
+    margin: 0 auto;
+  }
+  li h4 {
     font-size: 1.25rem;
   }
 }

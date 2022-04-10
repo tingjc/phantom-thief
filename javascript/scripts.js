@@ -35,6 +35,8 @@ galleryApp.buttonClick = function() {
     const selectButton = document.querySelector("button");
     selectButton.addEventListener('click', function() {
 
+        error.textContent = ("")
+
         const optionSelect = document.querySelector("select");
         const departmentValue = optionSelect.value
 
@@ -51,13 +53,13 @@ galleryApp.buttonClick = function() {
         departmentId: departmentValue,
         isOnView: true
 
-
     }
 )
     galleryApp.IDcall();
     })
 } // .buttonClick END
 
+const error = document.createElement('p')
 
 galleryApp.IDcall = function() {
     fetch(galleryApp.url)
@@ -66,6 +68,15 @@ galleryApp.IDcall = function() {
     })
     .then(function(jsonData) {
         console.log("our response data", jsonData); 
+        if (jsonData.objectIDs === null) {
+
+            const header = document.querySelector('.headerTwo')
+
+            error.textContent = "Nothing on display!"
+
+            header.append(error)
+            console.log("error")
+        }
         // this gives an object of an array of objectIDs
         galleryApp.arrayList = jsonData.objectIDs.slice(0, 12);
         
@@ -77,19 +88,19 @@ galleryApp.IDcall = function() {
         // push them into empty array
         // galleryApp.displayList = []
 
-        
         galleryApp.arrayList.forEach(function(id){
             
             fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`)
             .then( function(response) {
-                
                 return response.json()
                 
 
             })
             .then(function(jsonData) {
-                console.log("data", jsonData)
                 galleryApp.displayImg(jsonData);
+                // galleryApp.zoomImg(jsonData);
+                galleryApp.displayText(jsonData);
+                
                 // galleryApp.displayList.push(jsonData);
             })
         })//arrayList.loop END
@@ -97,29 +108,66 @@ galleryApp.IDcall = function() {
     })
 }; //galleryApp.IDcall END
 
-galleryApp.displayImg = function(option) {
-    
+galleryApp.displayText = function(data) {
+
+    console.log("mydata", data)
+    // const list = document.querySelector('li')
+    const h4 = document.querySelectorAll('.artTitles')
+    console.log("h4 here", h4)
+    // console.log("this", this)
+
+    const h4Length = h4.length
+    console.log(h4.length)
+
+    // for (let i = 0; i < h4.length; i++) { 
+    //     console.log(i)
+    // }
+    // const element = h4[length++]
+    // console.log("hi i am element", element)
+    h4.forEach(function (individualh4) {
+    individualh4.addEventListener('click', function () {
+    //     // console.log("this", this, "h4", h4, "h4 length++", h4[length++])
+        console.log("indi", individualh4)
+        console.log("h4", h4)
+        // h4.innerHTML = data.title
+        // console.log("data title here", data.title)
+        // console.log("length here", h4.length)
+
+    })
+})
+}
+
+// galleryApp.zoomImg = function(data) {
+//     const imageSmall = document.querySelector("img") 
+
+//         imageSmall.addEventListener('click', function(data){
+//             console.log("hello everyone")
+            
+//     })
+// }
+
+galleryApp.displayImg = function(option) {    
 
     let titleCut = option.title;
 
-    if (titleCut.length > 30){
-        titleCut = titleCut.slice(0, 30) + "[...]";
+    if (titleCut.length > 50){
+        titleCut = titleCut.slice(0, 40) + "[...]";
     }
 
     const li = document.createElement('li')
+
     li.innerHTML = 
     `
     <div class="containerimg">
         <img src="${option.primaryImageSmall}" alt="${option.title} by ${option.artistDisplayName}">
     </div>
-    <h4>${titleCut}</h4>
+    <h4 class=artTitles>${titleCut}</h4>
 
     <p>${option.artistDisplayName}</p>
     <a href="${option.objectURL}"><p>Link to the museum</p></a> 
     `
-
     ul.appendChild(li)
-
+    
 }
 //create object display function
 // display function requires a separate call to individual object APIs
@@ -146,12 +194,14 @@ galleryApp.departmentDisplay = function (jsonObject) {
     const selectDropdown = document.querySelector("#dropdown");
     
     
-    departmentArray.forEach( function(departmentNumber) {
+    
+    departmentArray.forEach(function(departmentNumber) {
         
         const newOption = document.createElement("option");
         newOption.value = departmentNumber.departmentId;
         newOption.innerText = departmentNumber.displayName;
         selectDropdown.append(newOption);
+        
     })
 
 }
