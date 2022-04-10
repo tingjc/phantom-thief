@@ -28,6 +28,7 @@
 
 const galleryApp = {};
 
+//global ul for selection purposes later
 const ul = document.querySelector('.results')
 
 //create event for form submission aka button click
@@ -59,15 +60,18 @@ galleryApp.buttonClick = function() {
     })
 } // .buttonClick END
 
+//global scope error message element
 const error = document.createElement('p')
 
+// call to the Met API for objectIDs
 galleryApp.IDcall = function() {
     fetch(galleryApp.url)
     .then( function(response) {
         return response.json();
     })
     .then(function(jsonData) {
-        console.log("our response data", jsonData); 
+        console.log("our response data", jsonData);
+        //error handling for if the search returns empty 
         if (jsonData.objectIDs === null) {
 
             const header = document.querySelector('.headerTwo')
@@ -84,57 +88,34 @@ galleryApp.IDcall = function() {
     })
     .then(function() {
         console.log("our sliced array", galleryApp.arrayList);
+        
         //create loop to call individual object APIs
-        // push them into empty array
-        // galleryApp.displayList = []
-
         galleryApp.arrayList.forEach(function(id){
             
             fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`)
             .then( function(response) {
-                return response.json()
-                
+                return response.json()  
 
             })
             .then(function(jsonData) {
                 galleryApp.displayImg(jsonData);
-                // galleryApp.zoomImg(jsonData);
-                galleryApp.displayText(jsonData);
                 
-                // galleryApp.displayList.push(jsonData);
             })
         })//arrayList.loop END
-        // console.log("list to be displayed", galleryApp.displayList);
     })
 }; //galleryApp.IDcall END
 
-galleryApp.displayText = function(data) {
-
-    console.log("mydata", data)
-    // const list = document.querySelector('li')
-    const h4 = document.querySelectorAll('.artTitles')
-    console.log("h4 here", h4)
-    // console.log("this", this)
-
-    const h4Length = h4.length
-    console.log(h4.length)
-
-    // for (let i = 0; i < h4.length; i++) { 
-    //     console.log(i)
-    // }
-    // const element = h4[length++]
-    // console.log("hi i am element", element)
-    h4.forEach(function (individualh4) {
-    individualh4.addEventListener('click', function () {
-    //     // console.log("this", this, "h4", h4, "h4 length++", h4[length++])
-        console.log("indi", individualh4)
-        console.log("h4", h4)
-        // h4.innerHTML = data.title
-        // console.log("data title here", data.title)
-        // console.log("length here", h4.length)
+galleryApp.displayText = function() {
+    ul.addEventListener("click", function(event){
+        console.log(event.target)
+        console.log(event.target.innerText)
+        console.log(event.target.title)
+        if(event.target.innerText !== event.target.title) {
+            event.target.innerText = event.target.title
+        }
 
     })
-})
+
 }
 
 // galleryApp.zoomImg = function(data) {
@@ -148,12 +129,15 @@ galleryApp.displayText = function(data) {
 
 galleryApp.displayImg = function(option) {    
 
+    // Some object titles are so long they garble the display space
+    // create variable for checking title length
     let titleCut = option.title;
 
     if (titleCut.length > 50){
         titleCut = titleCut.slice(0, 40) + "[...]";
     }
 
+    // create 'li' to append to .results 'ul'
     const li = document.createElement('li')
 
     li.innerHTML = 
@@ -161,10 +145,12 @@ galleryApp.displayImg = function(option) {
     <div class="containerimg">
         <img src="${option.primaryImageSmall}" alt="${option.title} by ${option.artistDisplayName}">
     </div>
-    <h4 class=artTitles>${titleCut}</h4>
+    <div class="containerText">
+    <h4 class="artTitles" title="${option.title}">${titleCut}</h4>
 
     <p>${option.artistDisplayName}</p>
-    <a href="${option.objectURL}"><p>Link to the museum</p></a> 
+    <a href="${option.objectURL}"><p>Link to the museum</p></a>
+    </div> 
     `
     ul.appendChild(li)
     
@@ -212,6 +198,7 @@ galleryApp.init = function() {
     console.log("Hello");
     galleryApp.departmentCall();
     galleryApp.buttonClick();
+    galleryApp.displayText();
 
 }
 
