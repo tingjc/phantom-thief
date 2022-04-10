@@ -107,9 +107,6 @@ galleryApp.IDcall = function() {
 
 galleryApp.displayText = function() {
     ul.addEventListener("click", function(event){
-        console.log(event.target)
-        console.log(event.target.innerText)
-        console.log(event.target.title)
         if(event.target.innerText !== event.target.title) {
             event.target.innerText = event.target.title
         }
