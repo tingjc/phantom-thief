@@ -1,0 +1,76 @@
+// ipad 810x1080 landscape
+@media (max-width: 1080px) {
+    h1 {
+        font-size: 3.5rem;
+    }
+    h2 {
+        font-size: 3rem;
+    }
+    .headerimg {
+        background-position: 60%;
+    }
+
+} // query end
+
+// ipad portrait, pro max and ultra landscape
+@media (max-width: 930px) {
+
+
+    li {
+        width: calc(80% - 60px);
+    }
+
+} // query end
+
+// phone portrait
+@media (max-width: 500px) {
+    html {
+        font-size: 100%;
+    }
+
+    .headerimg{
+        background-image:none ;
+    }
+
+    .wrapper {
+        width: 90%;
+    }
+
+    .leftSide {
+        width: 100%;
+        text-align: center;
+        p {
+            width: 100%;
+        }
+    }
+
+    h1 {
+        font-size: 3rem;
+    }
+
+    h2 {
+        font-size: 2.5rem;
+    }
+    select {
+        width: 100%;
+    }
+    li {
+        border: 1px solid #FABA63;
+        width: 95%;
+        box-shadow: none;
+
+        .containerimg {
+            width: 100%;
+            padding: 20px 5px 5px 5px;
+            img {
+                width: 80%;
+                margin: 0 auto;
+            }
+        }
+        
+        h4 {
+            font-size: 1.25rem;
+        }
+    }
+
+} //query end
