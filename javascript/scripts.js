@@ -32,14 +32,14 @@ const galleryApp = {};
 const ul = document.querySelector('.results')
 
 //create event for form submission aka button click
-galleryApp.buttonClick = function() {
+galleryApp.buttonClick = function (query) {
     const selectButton = document.querySelector("button");
     selectButton.addEventListener('click', function() {
-      
         error.textContent = ("")
 
         const optionSelect = document.querySelector("select");
         const departmentValue = optionSelect.value
+        console.log(departmentValue)
 
         const h2 = document.querySelector('h2')
         h2.innerText = optionSelect.selectedOptions[0].innerText
@@ -178,11 +178,17 @@ galleryApp.departmentDisplay = function (jsonObject) {
 
 
 galleryApp.init = function() {
-    console.log("Hello");
+    // console.log("Hello");
+    // const form = document.querySelector('form')
+    // form.addEventListener("submit", function (event) {
+    //     event.preventDefault();
+    //     const selection = document.querySelector('#searchInput').value;
+    //     console.log(selection)
+    // })
+    // console.log("hey i am the form", form)
     galleryApp.departmentCall();
     galleryApp.buttonClick();
     galleryApp.displayText();
-
-}
+};
 
 galleryApp.init();

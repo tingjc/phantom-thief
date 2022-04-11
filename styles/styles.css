@@ -284,7 +284,7 @@ h1 {
 }
 
 h2 {
-  font-size: 4.35rem;
+  font-size: 3.5rem;
   letter-spacing: 0.2rem;
   color: #FFFFFF;
 }
@@ -292,7 +292,7 @@ h2 {
 h3 {
   line-height: 1.6rem;
   letter-spacing: 0.1rem;
-  color: #393939;
+  color: #525252;
 }
 
 h4 {
@@ -369,8 +369,9 @@ a {
   color: #FFFFFF;
 }
 .leftSide h3 {
-  color: #393939;
+  color: #525252;
   margin: 30px 0;
+  padding-bottom: 75px;
 }
 
 button {
@@ -400,7 +401,7 @@ select {
 
 .headerTwo {
   text-align: center;
-  padding: 100px 0;
+  padding: 100px 0 50px 0;
 }
 
 li {
@@ -418,10 +419,10 @@ li {
       -ms-flex-pack: center;
           justify-content: center;
   text-align: center;
-  margin: 0 0 150px 0;
+  margin: 0 0 75px 0;
   padding: 10px;
   width: calc(50% - 60px);
-  background-color: #393939;
+  background-color: #525252;
   -webkit-box-shadow: 10px 10px 0 0 #FABA63;
           box-shadow: 10px 10px 0 0 #FABA63;
   cursor: pointer;
@@ -455,8 +456,9 @@ h4 {
 }
 
 footer {
+  margin-top: 25px;
   padding: 15px 0;
-  background-color: #393939;
+  background-color: #525252;
 }
 footer p {
   text-align: center;

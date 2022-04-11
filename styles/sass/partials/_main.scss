@@ -33,6 +33,7 @@
     h3 {
         color: $darkgrey;
         margin: 30px 0; 
+        padding-bottom: 75px;
     }
 }
 
@@ -59,7 +60,7 @@ select {
 
 .headerTwo {
     text-align: center;
-    padding: 100px 0;
+    padding: 100px 0 50px 0;
 }
 
 li {
@@ -69,7 +70,7 @@ li {
     justify-content: center;
     text-align: center;
     // height: 450px;
-    margin: 0 0 150px 0;
+    margin: 0 0 75px 0;
     padding: 10px;
     width: calc(50% - 60px);
     background-color: $darkgrey;
@@ -112,6 +113,7 @@ h4 {
 }
 
 footer {
+    margin-top: 25px;
     padding: 15px 0;
     background-color: $darkgrey;
     p {
