@@ -424,6 +424,7 @@ li {
   background-color: #393939;
   -webkit-box-shadow: 10px 10px 0 0 #FABA63;
           box-shadow: 10px 10px 0 0 #FABA63;
+  cursor: pointer;
 }
 li p {
   margin-bottom: 15px;
@@ -461,6 +462,12 @@ footer p {
   text-align: center;
   color: #FFFFFF;
   text-transform: capitalize;
+}
+
+.pop {
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 
 @media (max-width: 1080px) {

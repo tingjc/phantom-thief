@@ -75,6 +75,8 @@ li {
     background-color: $darkgrey;
     box-shadow: 10px 10px 0 0 $apricot;
     // margin: 0 0 30px 0;
+    cursor: pointer;
+    
     p {
         margin-bottom: 15px;
         color: $white;
@@ -117,4 +119,12 @@ footer {
         color: $white;
         text-transform: capitalize;
     }
+}
+
+// adding in styles for pop-out function
+
+.pop {
+    position: fixed;
+    top: 0;
+    width: 100%;
 }

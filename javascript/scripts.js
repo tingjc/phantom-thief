@@ -98,33 +98,20 @@ galleryApp.IDcall = function() {
             })
             .then(function(jsonData) {
                 galleryApp.displayImg(jsonData);
-                
             })
         })//arrayList.loop END
+        
     })
+    
 }; //galleryApp.IDcall END
 
 galleryApp.displayText = function() {
     ul.addEventListener("click", function(event){
-        console.log(event.target)
-        console.log(event.target.innerText)
-        console.log(event.target.title)
         if(event.target.innerText !== event.target.title) {
             event.target.innerText = event.target.title
         }
-
     })
-
 }
-
-// galleryApp.zoomImg = function(data) {
-//     const imageSmall = document.querySelector("img") 
-
-//         imageSmall.addEventListener('click', function(data){
-//             console.log("hello everyone")
-            
-//     })
-// }
 
 galleryApp.displayImg = function(option) {    
 
@@ -145,6 +132,7 @@ galleryApp.displayImg = function(option) {
         <img src="${option.primaryImageSmall}" alt="${option.title} by ${option.artistDisplayName}">
     </div>
     <div class="containerText">
+    <p>ID: ${option.objectID}</p>
     <h4 class="artTitles" title="${option.title}">${titleCut}</h4>
 
     <p>${option.artistDisplayName}</p>
