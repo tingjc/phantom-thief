@@ -7,6 +7,21 @@
     
 }
 
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.phantomBun {
+    width: 50%;
+    max-width: 500px;
+    img {
+        width: 100%;
+        height: auto;
+    }
+}
+
 .leftSide {
     width: 50%;
     p {
