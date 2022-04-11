@@ -29,6 +29,20 @@
         }
     }
 
+    .container {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        position: relative;
+        .phantomBun{
+            align-self: flex-end;
+
+        }
+        .departmentOptions {
+            position: absolute;
+            top: 0;
+        }
+    }
+
 } // query end
 
 // ipad portrait, pro max and ultra landscape
