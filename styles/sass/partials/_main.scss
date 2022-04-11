@@ -1,10 +1,29 @@
 //main page
 .headerimg {
-    background-image: url(../assets/backgroundImg.jpg);
+    background-image: url(../assets/background_1.jpg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     
+}
+
+h1 {
+    padding: 35px 0;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.phantomBun {
+    width: 30%;
+    max-width: 500px;
+    img {
+        width: 100%;
+        height: auto;
+    }
 }
 
 .leftSide {
@@ -13,12 +32,10 @@
         text-transform: capitalize;
         width: 35%;
         padding: 20px 0;
-        color: $white;
     }
     h3 {
-        color: $darkgrey;
-        margin: 30px 0; 
-        padding-bottom: 75px;
+        color: $lightgrey;
+        margin: 0 0 60px 0; 
     }
 }
 
@@ -46,6 +63,11 @@ select {
 .headerTwo {
     text-align: center;
     padding: 100px 0 50px 0;
+    p {
+        color: $apricot;
+        padding: 20px;
+        font-size: 1.5rem;
+    }
 }
 
 li {
@@ -55,12 +77,14 @@ li {
     justify-content: center;
     text-align: center;
     // height: 450px;
-    margin: 0 0 75px 0;
+    margin: 0 0 100px 0;
     padding: 10px;
     width: calc(50% - 60px);
     background-color: $darkgrey;
     box-shadow: 10px 10px 0 0 $apricot;
     // margin: 0 0 30px 0;
+    cursor: pointer;
+    
     p {
         margin-bottom: 15px;
         color: $white;
@@ -85,18 +109,17 @@ li {
     }
 }
 
-.headerTwo {
-    p {
-        color: $apricot;
+h4 {
+    margin: 0 0 10px 0;
+}
+
+.departmentOptions {
+    >h4 {
+        margin: 10px 0 0 0;
     }
 }
 
-h4 {
-    margin: 10px 0;
-}
-
 footer {
-    margin-top: 25px;
     padding: 15px 0;
     background-color: $darkgrey;
     p {
@@ -104,4 +127,12 @@ footer {
         color: $white;
         text-transform: capitalize;
     }
+}
+
+// adding in styles for pop-out function
+
+.pop {
+    position: fixed;
+    top: 0;
+    width: 100%;
 }
