@@ -4,19 +4,21 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    
 }
 
+//header title
 h1 {
     padding: 35px 0;
 }
 
+//main section container
 .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
+//image container
 .phantomBun {
     width: 30%;
     max-width: 500px;
@@ -26,6 +28,7 @@ h1 {
     }
 }
 
+//header left side
 .leftSide {
     width: 50%;
     p {
@@ -39,6 +42,7 @@ h1 {
     }
 }
 
+//button for dropdown menu
 button {
     border: 1px solid $apricot;
     background-color: $black;
@@ -46,6 +50,7 @@ button {
     color: $white;
 }
 
+//styling the select dropdown menu
 select {
     background-color: $apricot;
     border: none;
@@ -54,12 +59,14 @@ select {
     margin: 20px 0;
 }
 
+//where we append our javascript
 .results {
     display:flex;
     flex-wrap: wrap;
     justify-content: space-around;
 }
 
+//the title in main section
 .headerTwo {
     text-align: center;
     padding: 100px 0 50px 0;
@@ -70,21 +77,19 @@ select {
     }
 }
 
+//gallery styling
 li {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    // height: 450px;
     margin: 0 0 100px 0;
     padding: 10px;
     width: calc(50% - 60px);
     background-color: $darkgrey;
     box-shadow: 10px 10px 0 0 $apricot;
-    // margin: 0 0 30px 0;
     cursor: pointer;
-    
     p {
         margin-bottom: 15px;
         color: $white;
@@ -119,6 +124,7 @@ h4 {
     }
 }
 
+//footer
 footer {
     padding: 15px 0;
     background-color: $darkgrey;
@@ -130,7 +136,6 @@ footer {
 }
 
 // adding in styles for pop-out function
-
 .pop {
     position: fixed;
     top: 0;
