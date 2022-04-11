@@ -28,20 +28,23 @@
 
 const galleryApp = {};
 
+//global ul for selection purposes later
 const ul = document.querySelector('.results')
 
 //create event for form submission aka button click
-galleryApp.buttonClick = function() {
+galleryApp.buttonClick = function (query) {
     const selectButton = document.querySelector("button");
     selectButton.addEventListener('click', function() {
-        ul.innerHTML = "";
+        error.textContent = ("")
 
         const optionSelect = document.querySelector("select");
         const departmentValue = optionSelect.value
+        console.log(departmentValue)
 
-        // const h2 = document.querySelector('h2')
+        const h2 = document.querySelector('h2')
+        h2.innerText = optionSelect.selectedOptions[0].innerText
 
-        // console.log(optionSelect)
+        ul.innerHTML = "";
 
         galleryApp.url = new URL("https://collectionapi.metmuseum.org/public/collection/v1/search");
 
@@ -51,70 +54,93 @@ galleryApp.buttonClick = function() {
         departmentId: departmentValue,
         isOnView: true
 
-
     }
 )
     galleryApp.IDcall();
     })
 } // .buttonClick END
 
+//global scope error message element
+const error = document.createElement('p')
 
+// call to the Met API for objectIDs
 galleryApp.IDcall = function() {
     fetch(galleryApp.url)
     .then( function(response) {
         return response.json();
     })
     .then(function(jsonData) {
-        console.log("our response data", jsonData); 
+        console.log("our response data", jsonData);
+        //error handling for if the search returns empty 
+        if (jsonData.objectIDs === null) {
+
+            const header = document.querySelector('.headerTwo')
+
+            error.textContent = "Nothing on display!"
+
+            header.append(error)
+            console.log("error")
+        }
         // this gives an object of an array of objectIDs
         galleryApp.arrayList = jsonData.objectIDs.slice(0, 12);
+        
         return galleryApp.arrayList
     })
     .then(function() {
         console.log("our sliced array", galleryApp.arrayList);
+        
         //create loop to call individual object APIs
-        // push them into empty array
-        // galleryApp.displayList = []
-
         galleryApp.arrayList.forEach(function(id){
             
             fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`)
             .then( function(response) {
-                return response.json()
-
+                return response.json()  
             })
             .then(function(jsonData) {
-                console.log(jsonData)
                 galleryApp.displayImg(jsonData);
-                // galleryApp.displayList.push(jsonData);
             })
         })//arrayList.loop END
-        // console.log("list to be displayed", galleryApp.displayList);
+        
     })
+    
 }; //galleryApp.IDcall END
 
-galleryApp.displayImg = function(option) {
+galleryApp.displayText = function() {
+    ul.addEventListener("click", function(event){
+        if(event.target.innerText !== event.target.title) {
+            event.target.innerText = event.target.title
+        }
+    })
+}
 
+galleryApp.displayImg = function(option) {    
+
+    // Some object titles are so long they garble the display space
+    // create variable for checking title length
     let titleCut = option.title;
 
-    if (titleCut.length > 30){
-        titleCut = titleCut.slice(0, 30) + "[...]";
+    if (titleCut.length > 50){
+        titleCut = titleCut.slice(0, 40) + "[...]";
     }
 
+    // create 'li' to append to .results 'ul'
     const li = document.createElement('li')
+
     li.innerHTML = 
     `
     <div class="containerimg">
         <img src="${option.primaryImageSmall}" alt="${option.title} by ${option.artistDisplayName}">
     </div>
-    <h4>${titleCut}</h4>
+    <div class="containerText">
+    <p>ID: ${option.objectID}</p>
+    <h4 class="artTitles" title="${option.title}">${titleCut}</h4>
 
     <p>${option.artistDisplayName}</p>
-    <a href="${option.objectURL}"><p>Link to the museum</p></a> 
+    <a href="${option.objectURL}"><p>Link to the museum</p></a>
+    </div> 
     `
-
     ul.appendChild(li)
-
+    
 }
 //create object display function
 // display function requires a separate call to individual object APIs
@@ -140,22 +166,29 @@ galleryApp.departmentDisplay = function (jsonObject) {
     const departmentArray = jsonObject.departments;
     const selectDropdown = document.querySelector("#dropdown");
     
-    departmentArray.forEach( function(departmentNumber) {
+    departmentArray.forEach(function(departmentNumber) {
+        
         const newOption = document.createElement("option");
         newOption.value = departmentNumber.departmentId;
         newOption.innerText = departmentNumber.displayName;
-        selectDropdown.append(newOption);
+        selectDropdown.append(newOption); 
     })
-
 }
 
 
 
 galleryApp.init = function() {
-    console.log("Hello");
+    // console.log("Hello");
+    // const form = document.querySelector('form')
+    // form.addEventListener("submit", function (event) {
+    //     event.preventDefault();
+    //     const selection = document.querySelector('#searchInput').value;
+    //     console.log(selection)
+    // })
+    // console.log("hey i am the form", form)
     galleryApp.departmentCall();
     galleryApp.buttonClick();
-
-}
+    galleryApp.displayText();
+};
 
 galleryApp.init();

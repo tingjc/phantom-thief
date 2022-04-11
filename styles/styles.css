@@ -265,11 +265,15 @@ html {
 }
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: "Lato", sans-serif;
   font-size: 1rem;
   background-color: #151515;
   max-width: 2500px;
   margin: 0 auto;
+}
+
+h1, h2, h3, h4 {
+  font-family: "Work Sans", sans-serif;
 }
 
 h1 {
@@ -280,27 +284,27 @@ h1 {
 }
 
 h2 {
-  font-size: 4.35rem;
-  letter-spacing: 0.45rem;
+  font-size: 3.5rem;
+  letter-spacing: 0.2rem;
   color: #FFFFFF;
 }
 
 h3 {
   line-height: 1.6rem;
   letter-spacing: 0.1rem;
-  color: #393939;
+  color: #525252;
 }
 
 h4 {
   font-size: 1.75rem;
-  letter-spacing: 0.19rem;
+  letter-spacing: 0.1rem;
   color: #FFFFFF;
 }
 
 p {
   line-height: 1.6rem;
-  letter-spacing: 0.1rem;
-  font-weight: 400;
+  letter-spacing: 0.05rem;
+  font-weight: 300;
 }
 
 *, h1 {
@@ -334,6 +338,27 @@ a {
   background-size: cover;
 }
 
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.phantomBun {
+  width: 50%;
+  max-width: 500px;
+}
+.phantomBun img {
+  width: 100%;
+  height: auto;
+}
+
 .leftSide {
   width: 50%;
 }
@@ -344,8 +369,9 @@ a {
   color: #FFFFFF;
 }
 .leftSide h3 {
-  color: #393939;
+  color: #525252;
   margin: 30px 0;
+  padding-bottom: 75px;
 }
 
 button {
@@ -375,7 +401,7 @@ select {
 
 .headerTwo {
   text-align: center;
-  padding: 100px 0;
+  padding: 100px 0 50px 0;
 }
 
 li {
@@ -393,12 +419,13 @@ li {
       -ms-flex-pack: center;
           justify-content: center;
   text-align: center;
-  margin: 0 0 150px 0;
+  margin: 0 0 75px 0;
   padding: 10px;
   width: calc(50% - 60px);
-  background-color: #393939;
+  background-color: #525252;
   -webkit-box-shadow: 10px 10px 0 0 #FABA63;
           box-shadow: 10px 10px 0 0 #FABA63;
+  cursor: pointer;
 }
 li p {
   margin-bottom: 15px;
@@ -406,10 +433,10 @@ li p {
 }
 li a p {
   color: #FABA63;
+  font-style: italic;
 }
 
 .containerimg {
-  width: 90%;
   height: auto;
   padding: 20px;
 }
@@ -420,13 +447,18 @@ li a p {
      object-fit: contain;
 }
 
+.headerTwo p {
+  color: #FABA63;
+}
+
 h4 {
   margin: 10px 0;
 }
 
 footer {
+  margin-top: 25px;
   padding: 15px 0;
-  background-color: #393939;
+  background-color: #525252;
 }
 footer p {
   text-align: center;
@@ -434,13 +466,42 @@ footer p {
   text-transform: capitalize;
 }
 
+.pop {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
 @media (max-width: 1080px) {
   h1 {
     font-size: 3.5rem;
   }
 
+  h2 {
+    font-size: 3rem;
+  }
+
   .headerimg {
     background-position: 60%;
+  }
+
+  .container {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: column-reverse;
+            flex-direction: column-reverse;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+    position: relative;
+  }
+  .container .phantomBun {
+    -ms-flex-item-align: end;
+        align-self: flex-end;
+  }
+  .container .departmentOptions {
+    position: absolute;
+    top: 0;
   }
 }
 @media (max-width: 930px) {
@@ -448,23 +509,66 @@ footer p {
     width: calc(80% - 60px);
   }
 }
+@media (max-width: 768px) {
+  .container {
+    position: static;
+  }
+  .container .departmentOptions {
+    position: static;
+  }
+  .container .phantomBun {
+    -ms-flex-item-align: center;
+        align-self: center;
+  }
+}
 @media (max-width: 500px) {
   html {
     font-size: 100%;
+  }
+
+  .headerimg {
+    background-image: none;
+  }
+
+  .wrapper {
+    width: 90%;
+  }
+
+  .leftSide {
+    width: 100%;
+    text-align: center;
+  }
+  .leftSide p {
+    width: 100%;
   }
 
   h1 {
     font-size: 3rem;
   }
 
-  .results li {
-    width: 95%;
+  h2 {
+    font-size: 2.5rem;
   }
-  .results li .containerimg {
+
+  select {
+    width: 100%;
+  }
+
+  li {
+    border: 1px solid #FABA63;
+    width: 95%;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+  }
+  li .containerimg {
     width: 100%;
     padding: 20px 5px 5px 5px;
   }
-  .results li h4 {
+  li .containerimg img {
+    width: 80%;
+    margin: 0 auto;
+  }
+  li h4 {
     font-size: 1.25rem;
   }
 }

@@ -3,8 +3,25 @@
     h1 {
         font-size: 3.5rem;
     }
+    h2 {
+        font-size: 3rem;
+    }
     .headerimg {
         background-position: 60%;
+    }
+
+    .container {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        position: relative;
+        .phantomBun{
+            align-self: flex-end;
+
+        }
+        .departmentOptions {
+            position: absolute;
+            top: 0;
+        }
     }
 
 } // query end
@@ -19,22 +36,65 @@
 
 } // query end
 
+@media (max-width: 768px) {
+    .container {
+        position: static;
+        .departmentOptions {
+            position: static;
+        }
+        .phantomBun {
+            align-self: center;
+        }
+       
+    }
+
+}
 // phone portrait
 @media (max-width: 500px) {
     html {
         font-size: 100%;
     }
 
+    .headerimg{
+        background-image:none ;
+    }
+
+    .wrapper {
+        width: 90%;
+    }
+
+    .leftSide {
+        width: 100%;
+        text-align: center;
+        p {
+            width: 100%;
+        }
+    }
+
     h1 {
         font-size: 3rem;
     }
 
-    .results li {
+    h2 {
+        font-size: 2.5rem;
+    }
+    
+
+    select {
+        width: 100%;
+    }
+    li {
+        border: 1px solid #FABA63;
         width: 95%;
+        box-shadow: none;
 
         .containerimg {
             width: 100%;
             padding: 20px 5px 5px 5px;
+            img {
+                width: 80%;
+                margin: 0 auto;
+            }
         }
         
         h4 {
