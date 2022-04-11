@@ -90,7 +90,7 @@ galleryApp.IDcall = function() {
         console.log("our sliced array", galleryApp.arrayList);
         
         //create loop to call individual object APIs
-        galleryApp.arrayList.forEach(function(id){
+        galleryApp.arrayList.forEach(function(id, index){
             
             fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`)
             .then( function(response) {
@@ -98,17 +98,49 @@ galleryApp.IDcall = function() {
             })
             .then(function(jsonData) {
                 galleryApp.displayImg(jsonData);
+                
+                if (index === galleryApp.arrayList.length-1) {
+                    console.log("LAST")
+                    //ADDEVENTLISTENER
+                    const AllLi = document.querySelectorAll("li");
+                    console.log("hello", AllLi);
+                    AllLi.forEach(li => {
+                        li.addEventListener("click", function(event) {
+                            if (li.classList.contains("pop")) {
+                                li.classList.remove("pop");
+                            } else {
+                                li.classList.add("pop");
+                            }
+                            console.log("CLICKED")
+                        });
+                    })
+                }
             })
         })//arrayList.loop END
+
+        document.querySelector(".galleryName").scrollIntoView(true);
         
     })
     
 }; //galleryApp.IDcall END
 
-galleryApp.displayText = function() {
-    ul.addEventListener("click", function(event){
-        if(event.target.innerText !== event.target.title) {
-            event.target.innerText = event.target.title
+
+// // this function takes long titles that got truncated and expands them to their full version
+// galleryApp.displayText = function() {
+//     ul.addEventListener("click", function(event){
+//         if(event.target.innerText !== event.target.title) {
+//             event.target.innerText = event.target.title
+//         }
+//     })
+// }
+
+galleryApp.popUp = function() {
+    ul.addEventListener("click", function(event) {
+        const li = event.target.closest("li");
+        if(li.classList === "") {
+            li.classList.add("pop")
+        } else {
+            li.classList = "";
         }
     })
 }
@@ -188,7 +220,7 @@ galleryApp.init = function() {
     // console.log("hey i am the form", form)
     galleryApp.departmentCall();
     galleryApp.buttonClick();
-    galleryApp.displayText();
+    // galleryApp.displayText();
 };
 
 galleryApp.init();
