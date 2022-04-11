@@ -9,6 +9,25 @@
     .headerimg {
         background-position: 60%;
     }
+    .leftSide {
+        p {
+            width: 45%;
+        }
+    }
+
+    .container {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        position: relative;
+        .phantomBun{
+            align-self: flex-end;
+
+        }
+        .departmentOptions {
+            position: absolute;
+            top: 0;
+        }
+    }
 
     .container {
         flex-direction: column-reverse;
@@ -28,10 +47,16 @@
 
 // ipad portrait, pro max and ultra landscape
 @media (max-width: 930px) {
-
-
+    .leftSide {
+        width: 65%;
+    }
     li {
         width: calc(80% - 60px);
+    }
+    .leftSide {
+        p {
+            width: 55%;
+        }
     }
 
 } // query end
@@ -45,9 +70,7 @@
         .phantomBun {
             align-self: center;
         }
-       
     }
-
 }
 // phone portrait
 @media (max-width: 500px) {
@@ -78,7 +101,18 @@
     h2 {
         font-size: 2.5rem;
     }
-    
+    .phantomBun {
+        width: 50%;
+        max-width: 500px;
+    }
+    .departmentOptions {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        button {
+            margin: 0;
+        }
+    }
 
     select {
         width: 100%;

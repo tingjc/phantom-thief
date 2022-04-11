@@ -32,7 +32,7 @@ const galleryApp = {};
 const ul = document.querySelector('.results')
 
 //create event for form submission aka button click
-galleryApp.buttonClick = function (query) {
+galleryApp.buttonClick = function () {
     const selectButton = document.querySelector("button");
     selectButton.addEventListener('click', function() {
         error.textContent = ("")
@@ -124,24 +124,20 @@ galleryApp.IDcall = function() {
     
 }; //galleryApp.IDcall END
 
-
 // // this function takes long titles that got truncated and expands them to their full version
 // galleryApp.displayText = function() {
 //     ul.addEventListener("click", function(event){
-//         if(event.target.innerText !== event.target.title) {
+
+//        if (event.target.tagName === "H4") {
+//             event.target.innerText !== event.target.title 
 //             event.target.innerText = event.target.title
 //         }
 //     })
 // }
 
-galleryApp.popUp = function() {
-    ul.addEventListener("click", function(event) {
-        const li = event.target.closest("li");
-        if(li.classList === "") {
-            li.classList.add("pop")
-        } else {
-            li.classList = "";
         }
+            console.log("i am the target",event.target)
+
     })
 }
 
@@ -210,14 +206,7 @@ galleryApp.departmentDisplay = function (jsonObject) {
 
 
 galleryApp.init = function() {
-    // console.log("Hello");
-    // const form = document.querySelector('form')
-    // form.addEventListener("submit", function (event) {
-    //     event.preventDefault();
-    //     const selection = document.querySelector('#searchInput').value;
-    //     console.log(selection)
-    // })
-    // console.log("hey i am the form", form)
+    console.log("Hello");
     galleryApp.departmentCall();
     galleryApp.buttonClick();
     // galleryApp.displayText();
