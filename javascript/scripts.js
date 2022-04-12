@@ -133,6 +133,8 @@ galleryApp.IDcall = function() {
     
 }; //galleryApp.IDcall END
 
+//create object display function
+// display function requires a separate call to individual object APIs
 galleryApp.displayImg = function(option) {    
 
     // Some object titles are so long they garble the display space
@@ -160,11 +162,7 @@ galleryApp.displayImg = function(option) {
     </div> 
     `
     ul.appendChild(li)
-    
-}
-//create object display function
-// display function requires a separate call to individual object APIs
-
+}//displayImg END
 
 //Populating Dropdown Menu with Department Name
 // // make function to call departments API
@@ -195,10 +193,7 @@ galleryApp.departmentDisplay = function (jsonObject) {
     })
 }
 
-
-
 galleryApp.init = function() {
-    console.log("Hello");
     galleryApp.departmentCall();
     galleryApp.buttonClick();
     // galleryApp.displayText();
