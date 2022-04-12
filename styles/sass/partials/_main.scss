@@ -48,6 +48,14 @@ button {
     background-color: $black;
     padding: 10px 20px;
     color: $white;
+    &:hover { 
+        background-color: $apricot;
+        color: $black;
+    }
+    &:focus {
+        background-color: $apricot;
+        color: $black;
+    }
 }
 
 //styling the select dropdown menu
@@ -88,8 +96,49 @@ li {
     padding: 10px;
     width: calc(50% - 60px);
     background-color: $darkgrey;
-    box-shadow: 10px 10px 0 0 $apricot;
+    box-shadow: 6px 6px 0 0 $apricot;
     cursor: pointer;
+    &:hover {
+        box-shadow: none;
+        background-color: $apricot;
+        p {
+            color: $black;
+            &:last-child {
+                border: 1px solid $black;
+                display: inline;
+                padding: 5px 10px;
+                margin-bottom: 10px;
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+        h4 {
+            color: $black;
+        }
+    }
+    &:focus {
+        box-shadow: none;
+        background-color: $apricot;
+        p {
+            color: $black;
+            &:last-child {
+                border: 1px solid $black;
+                display: inline;
+                padding: 5px 10px;
+                &:focus {
+                    text-decoration: underline;
+                }
+            }
+        }
+        h4 {
+            color: $black;
+        }
+    }
+
+    h4 {
+        color:$white;
+    }
     p {
         margin-bottom: 15px;
         color: $white;
@@ -99,7 +148,6 @@ li {
         p {
             color: $apricot;
             font-style: italic;
-            ;
         }
     }
 }
@@ -112,6 +160,10 @@ li {
         height: auto;
         object-fit: contain;
     }
+}
+
+.containerText {
+    margin-bottom: 25px;
 }
 
 h4 {

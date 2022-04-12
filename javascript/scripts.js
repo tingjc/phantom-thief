@@ -135,12 +135,6 @@ galleryApp.IDcall = function() {
 //     })
 // }
 
-        }
-            console.log("i am the target",event.target)
-
-    })
-}
-
 galleryApp.displayImg = function(option) {    
 
     // Some object titles are so long they garble the display space
