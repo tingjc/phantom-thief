@@ -89,6 +89,7 @@ li {
     width: calc(50% - 60px);
     background-color: $darkgrey;
     box-shadow: 10px 10px 0 0 $apricot;
+    transition: 0.5s;
     cursor: pointer;
     p {
         margin-bottom: 15px;
@@ -139,5 +140,7 @@ footer {
 .pop {
     position: fixed;
     top: 0;
-    width: 100%;
+    width: 80%;
+    height: 100vh;
 }
+
