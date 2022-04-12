@@ -612,6 +612,13 @@ footer p {
   .leftSide p {
     width: 55%;
   }
+
+  .pop {
+    overflow-y: scroll;
+  }
+  .pop .containerText {
+    width: 80%;
+  }
 }
 @media (max-width: 768px) {
   .container {
@@ -697,5 +704,9 @@ footer p {
 
   .pop {
     width: 90%;
+    overflow-y: scroll;
+  }
+  .pop .containerText {
+    width: 100%;
   }
 }
