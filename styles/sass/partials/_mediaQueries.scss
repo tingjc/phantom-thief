@@ -3,26 +3,141 @@
     h1 {
         font-size: 3.5rem;
     }
+    h2 {
+        font-size: 3rem;
+    }
     .headerimg {
         background-position: 60%;
     }
+    .leftSide {
+        p {
+            width: 45%;
+        }
+    }
 
-} // query end
+    .container {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        position: relative;
+        .phantomBun{
+            align-self: flex-end;
 
-// ipad portrait
-@media (max-width: 810px) {
+        }
+        .departmentOptions {
+            position: absolute;
+            top: 0;
+        }
+    }
 
+    .container {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        position: relative;
+        .phantomBun{
+            align-self: flex-end;
 
-    li {
-        width: calc(80% - 60px);
+        }
+        .departmentOptions {
+            position: absolute;
+            top: 0;
+        }
     }
 
 } // query end
 
+// ipad portrait, pro max and ultra landscape
+@media (max-width: 930px) {
+    .leftSide {
+        width: 65%;
+    }
+    li {
+        width: calc(80% - 60px);
+    }
+    .leftSide {
+        p {
+            width: 55%;
+        }
+    }
+
+} // query end
+
+@media (max-width: 768px) {
+    .container {
+        position: static;
+        .departmentOptions {
+            position: static;
+        }
+        .phantomBun {
+            align-self: center;
+        }
+    }
+}
 // phone portrait
 @media (max-width: 500px) {
-    .results h4 {
-        font-size: 1rem;
+    html {
+        font-size: 100%;
+    }
+
+    .headerimg{
+        background-image:none ;
+    }
+
+    .wrapper {
+        width: 90%;
+    }
+
+    .leftSide {
+        width: 100%;
+        text-align: center;
+        p {
+            width: 100%;
+        }
+    }
+
+    h1 {
+        font-size: 3rem;
+    }
+
+    h2 {
+        font-size: 2.5rem;
+    }
+    .phantomBun {
+        width: 50%;
+        max-width: 500px;
+    }
+    .departmentOptions {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        button {
+            margin: 0;
+        }
+    }
+
+    select {
+        width: 100%;
+    }
+    li {
+        border: 1px solid #FABA63;
+        width: 95%;
+        box-shadow: none;
+
+        .containerimg {
+            width: 100%;
+            padding: 20px 5px 5px 5px;
+            img {
+                width: 100%;
+                margin: 0 auto;
+            }
+        }
+        
+        h4 {
+            font-size: 1.25rem;
+        }
+    }
+
+    .pop {
+        width: 90%;
     }
 
 } //query end

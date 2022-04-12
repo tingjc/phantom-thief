@@ -1,33 +1,64 @@
 //main page
 .headerimg {
-    background-image: url(../assets/backgroundImg.jpg);
+    background-image: url(../assets/background_1.jpg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    
 }
 
+//header title
+h1 {
+    padding: 35px 0;
+}
+
+//main section container
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+//image container
+.phantomBun {
+    width: 30%;
+    max-width: 500px;
+    img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+//header left side
 .leftSide {
     width: 50%;
     p {
         text-transform: capitalize;
         width: 35%;
         padding: 20px 0;
-        color: $white;
     }
     h3 {
-        color: $darkgrey;
-        margin: 30px 0; 
+        color: $lightgrey;
+        margin: 0 0 60px 0; 
     }
 }
 
+//button for dropdown menu
 button {
     border: 1px solid $apricot;
     background-color: $black;
     padding: 10px 20px;
     color: $white;
+    &:hover { 
+        background-color: $apricot;
+        color: $black;
+    }
+    &:focus {
+        background-color: $apricot;
+        color: $black;
+    }
 }
 
+//styling the select dropdown menu
 select {
     background-color: $apricot;
     border: none;
@@ -36,42 +67,93 @@ select {
     margin: 20px 0;
 }
 
+//where we append our javascript
 .results {
     display:flex;
     flex-wrap: wrap;
     justify-content: space-around;
 }
 
+//the title in main section
 .headerTwo {
     text-align: center;
-    padding: 100px 0;
+    padding: 100px 0 50px 0;
+    p {
+        color: $apricot;
+        padding: 20px;
+        font-size: 1.5rem;
+    }
 }
 
+//gallery styling
 li {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    // height: 450px;
-    margin: 0 0 150px 0;
+    margin: 0 0 100px 0;
     padding: 10px;
     width: calc(50% - 60px);
     background-color: $darkgrey;
-    box-shadow: 10px 10px 0 0 $apricot;
-    // margin: 0 0 30px 0;
+    box-shadow: 6px 6px 0 0 $apricot;
+    transition: 0.5s;
+    cursor: pointer;
+    &:hover {
+        box-shadow: none;
+        background-color: $apricot;
+        p {
+            color: $black;
+            &:last-child {
+                border: 1px solid $black;
+                display: inline;
+                padding: 5px 10px;
+                margin-bottom: 10px;
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+        h4 {
+            color: $black;
+        }
+    }
+    &:focus {
+        box-shadow: none;
+        background-color: $apricot;
+        p {
+            color: $black;
+            &:last-child {
+                border: 1px solid $black;
+                display: inline;
+                padding: 5px 10px;
+                &:focus {
+                    text-decoration: underline;
+                }
+            }
+        }
+        h4 {
+            color: $black;
+        }
+    }
+
+    h4 {
+        color:$white;
+    }
     p {
         margin-bottom: 15px;
         color: $white;
     }
 
-    a p {
-        color: $apricot;
+    a { 
+        p {
+            color: $apricot;
+            font-style: italic;
+        }
     }
 }
 
 .containerimg {
-    width: 90%;
     height: auto;
     padding: 20px;
     img {
@@ -81,10 +163,21 @@ li {
     }
 }
 
-h4 {
-    margin: 10px 0;
+.containerText {
+    margin-bottom: 25px;
 }
 
+h4 {
+    margin: 0 0 10px 0;
+}
+
+.departmentOptions {
+    >h4 {
+        margin: 10px 0 0 0;
+    }
+}
+
+//footer
 footer {
     padding: 15px 0;
     background-color: $darkgrey;
@@ -94,3 +187,13 @@ footer {
         text-transform: capitalize;
     }
 }
+
+// adding in styles for pop-out function
+.pop {
+    position: fixed;
+    top: 0;
+    width: 80%;
+    height: 100vh;
+    overflow-y: scroll;
+}
+
