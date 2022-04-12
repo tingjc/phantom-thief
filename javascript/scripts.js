@@ -39,7 +39,6 @@ galleryApp.buttonClick = function () {
 
         const optionSelect = document.querySelector("select");
         const departmentValue = optionSelect.value
-        console.log(departmentValue)
 
         const h2 = document.querySelector('h2')
         h2.innerText = optionSelect.selectedOptions[0].innerText
@@ -70,7 +69,7 @@ galleryApp.IDcall = function() {
         return response.json();
     })
     .then(function(jsonData) {
-        console.log("our response data", jsonData);
+    
         //error handling for if the search returns empty 
         if (jsonData.objectIDs === null) {
 
@@ -79,7 +78,7 @@ galleryApp.IDcall = function() {
             error.textContent = "Nothing on display!"
 
             header.append(error)
-            console.log("error")
+            
         }
         // this gives an object of an array of objectIDs
         galleryApp.arrayList = jsonData.objectIDs.slice(0, 12);
@@ -87,7 +86,6 @@ galleryApp.IDcall = function() {
         return galleryApp.arrayList
     })
     .then(function() {
-        console.log("our sliced array", galleryApp.arrayList);
         
         //create loop to call individual object APIs
         galleryApp.arrayList.forEach(function(id, index){
@@ -100,18 +98,29 @@ galleryApp.IDcall = function() {
                 galleryApp.displayImg(jsonData);
                 
                 if (index === galleryApp.arrayList.length-1) {
-                    console.log("LAST")
                     //ADDEVENTLISTENER
                     const AllLi = document.querySelectorAll("li");
-                    console.log("hello", AllLi);
                     AllLi.forEach(li => {
                         li.addEventListener("click", function(event) {
+                            const close = document.querySelector(".tapToClose");
+                            const closeButton = document.createElement("p")
+                            closeButton.classList.add("tapToClose")
+                            closeButton.innerText = "Tap to Close"
+
                             if (li.classList.contains("pop")) {
+                                close.remove();
                                 li.classList.remove("pop");
+
+                                
                             } else {
                                 li.classList.add("pop");
+                                h4 = document.querySelectorAll(".artTitles");
+                                h4.forEach(h4 => {
+                                    h4.innerText = h4.title;
+                                })
+                                li.appendChild(closeButton);
+
                             }
-                            console.log("CLICKED")
                         });
                     })
                 }
@@ -123,17 +132,6 @@ galleryApp.IDcall = function() {
     })
     
 }; //galleryApp.IDcall END
-
-// // this function takes long titles that got truncated and expands them to their full version
-// galleryApp.displayText = function() {
-//     ul.addEventListener("click", function(event){
-
-//        if (event.target.tagName === "H4") {
-//             event.target.innerText !== event.target.title 
-//             event.target.innerText = event.target.title
-//         }
-//     })
-// }
 
 galleryApp.displayImg = function(option) {    
 

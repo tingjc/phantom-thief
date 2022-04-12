@@ -446,6 +446,7 @@ li {
   background-color: #5f5f5f;
   -webkit-box-shadow: 6px 6px 0 0 #FABA63;
           box-shadow: 6px 6px 0 0 #FABA63;
+  transition: 0.5s;
   cursor: pointer;
 }
 li:hover {
@@ -535,7 +536,8 @@ footer p {
 .pop {
   position: fixed;
   top: 0;
-  width: 100%;
+  width: 80%;
+  height: 100vh;
 }
 
 @media (max-width: 1080px) {
@@ -681,10 +683,14 @@ footer p {
     padding: 20px 5px 5px 5px;
   }
   li .containerimg img {
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
   }
   li h4 {
     font-size: 1.25rem;
+  }
+
+  .pop {
+    width: 100%;
   }
 }
