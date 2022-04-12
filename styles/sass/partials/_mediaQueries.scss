@@ -59,6 +59,13 @@
         }
     }
 
+    .pop {
+        overflow-y: scroll;
+        .containerText {
+            width: 80%;
+        }
+    }
+
 } // query end
 
 @media (max-width: 768px) {
@@ -138,6 +145,10 @@
 
     .pop {
         width: 90%;
+        overflow-y: scroll;   
+        .containerText {
+            width: 100%;
+        }
     }
 
 } //query end
