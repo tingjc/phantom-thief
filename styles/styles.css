@@ -541,6 +541,9 @@ footer p {
   height: 100vh;
   overflow-y: scroll;
 }
+.pop .containerText {
+  width: 50%;
+}
 
 @media (max-width: 1080px) {
   h1 {
