@@ -133,7 +133,6 @@ galleryApp.IDcall = function() {
     
 }; //galleryApp.IDcall END
 
-
 galleryApp.displayImg = function(option) {    
 
     // Some object titles are so long they garble the display space

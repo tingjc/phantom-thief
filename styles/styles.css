@@ -388,6 +388,14 @@ button {
   padding: 10px 20px;
   color: #FFFFFF;
 }
+button:hover {
+  background-color: #FABA63;
+  color: #151515;
+}
+button:focus {
+  background-color: #FABA63;
+  color: #151515;
+}
 
 select {
   background-color: #FABA63;
@@ -436,11 +444,52 @@ li {
   padding: 10px;
   width: calc(50% - 60px);
   background-color: #5f5f5f;
-  -webkit-box-shadow: 10px 10px 0 0 #FABA63;
-          box-shadow: 10px 10px 0 0 #FABA63;
-  -webkit-transition: 0.5s;
+  -webkit-box-shadow: 6px 6px 0 0 #FABA63;
+          box-shadow: 6px 6px 0 0 #FABA63;
   transition: 0.5s;
   cursor: pointer;
+}
+li:hover {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  background-color: #FABA63;
+}
+li:hover p {
+  color: #151515;
+}
+li:hover p:last-child {
+  border: 1px solid #151515;
+  display: inline;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+}
+li:hover p:last-child:hover {
+  text-decoration: underline;
+}
+li:hover h4 {
+  color: #151515;
+}
+li:focus {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  background-color: #FABA63;
+}
+li:focus p {
+  color: #151515;
+}
+li:focus p:last-child {
+  border: 1px solid #151515;
+  display: inline;
+  padding: 5px 10px;
+}
+li:focus p:last-child:focus {
+  text-decoration: underline;
+}
+li:focus h4 {
+  color: #151515;
+}
+li h4 {
+  color: #FFFFFF;
 }
 li p {
   margin-bottom: 15px;
@@ -460,6 +509,10 @@ li a p {
   height: auto;
   -o-object-fit: contain;
      object-fit: contain;
+}
+
+.containerText {
+  margin-bottom: 25px;
 }
 
 h4 {
