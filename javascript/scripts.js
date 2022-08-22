@@ -32,10 +32,9 @@ const galleryApp = {};
 const ul = document.querySelector('.results')
 
 //create event for form submission aka button click
-galleryApp.buttonClick = function() {
+galleryApp.buttonClick = function () {
     const selectButton = document.querySelector("button");
     selectButton.addEventListener('click', function() {
-      
         error.textContent = ("")
 
         const optionSelect = document.querySelector("select");
@@ -70,7 +69,7 @@ galleryApp.IDcall = function() {
         return response.json();
     })
     .then(function(jsonData) {
-        console.log("our response data", jsonData);
+    
         //error handling for if the search returns empty 
         if (jsonData.objectIDs === null) {
 
@@ -79,7 +78,7 @@ galleryApp.IDcall = function() {
             error.textContent = "Nothing on display!"
 
             header.append(error)
-            console.log("error")
+            
         }
         // this gives an object of an array of objectIDs
         galleryApp.arrayList = jsonData.objectIDs.slice(0, 12);
@@ -87,10 +86,9 @@ galleryApp.IDcall = function() {
         return galleryApp.arrayList
     })
     .then(function() {
-        console.log("our sliced array", galleryApp.arrayList);
         
         //create loop to call individual object APIs
-        galleryApp.arrayList.forEach(function(id){
+        galleryApp.arrayList.forEach(function(id, index){
             
             fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`)
             .then( function(response) {
@@ -99,8 +97,36 @@ galleryApp.IDcall = function() {
             .then(function(jsonData) {
                 galleryApp.displayImg(jsonData);
                 
+                if (index === galleryApp.arrayList.length-1) {
+                    //ADDEVENTLISTENER
+                    const AllLi = document.querySelectorAll("li");
+                    AllLi.forEach(li => {
+                        li.addEventListener("click", function(event) {
+                            const close = document.querySelector(".tapToClose");
+                            const closeButton = document.createElement("p")
+                            closeButton.classList.add("tapToClose")
+                            closeButton.innerText = "Tap to Close"
+
+                            if (li.classList.contains("pop")) {
+                                close.remove();
+                                li.classList.remove("pop");
+
+                                
+                            } else {
+                                li.classList.add("pop");
+                                h4 = document.querySelectorAll(".artTitles");
+                                h4.forEach(h4 => {
+                                    h4.innerText = h4.title;
+                                })
+                                li.appendChild(closeButton);
+
+                            }
+                        });
+                    })
+                }
             })
         })//arrayList.loop END
+
     })
 }; //galleryApp.IDcall END
 
@@ -110,19 +136,14 @@ galleryApp.displayText = function() {
             event.target.innerText = event.target.title
         }
 
+        document.querySelector(".galleryName").scrollIntoView(true);
+        
     })
+    
+}; //galleryApp.IDcall END
 
-}
-
-// galleryApp.zoomImg = function(data) {
-//     const imageSmall = document.querySelector("img") 
-
-//         imageSmall.addEventListener('click', function(data){
-//             console.log("hello everyone")
-            
-//     })
-// }
-
+//create object display function
+// display function requires a separate call to individual object APIs
 galleryApp.displayImg = function(option) {    
 
     // Some object titles are so long they garble the display space
@@ -142,6 +163,7 @@ galleryApp.displayImg = function(option) {
         <img src="${option.primaryImageSmall}" alt="${option.title} by ${option.artistDisplayName}">
     </div>
     <div class="containerText">
+    <p>ID: ${option.objectID}</p>
     <h4 class="artTitles" title="${option.title}">${titleCut}</h4>
 
     <p>${option.artistDisplayName}</p>
@@ -149,11 +171,7 @@ galleryApp.displayImg = function(option) {
     </div> 
     `
     ul.appendChild(li)
-    
-}
-//create object display function
-// display function requires a separate call to individual object APIs
-
+}//displayImg END
 
 //Populating Dropdown Menu with Department Name
 // // make function to call departments API
@@ -184,14 +202,10 @@ galleryApp.departmentDisplay = function (jsonObject) {
     })
 }
 
-
-
 galleryApp.init = function() {
-    console.log("Hello");
     galleryApp.departmentCall();
     galleryApp.buttonClick();
-    galleryApp.displayText();
-
-}
+    // galleryApp.displayText();
+};
 
 galleryApp.init();
