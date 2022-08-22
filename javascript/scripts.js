@@ -127,6 +127,15 @@ galleryApp.IDcall = function() {
             })
         })//arrayList.loop END
 
+    })
+}; //galleryApp.IDcall END
+
+galleryApp.displayText = function() {
+    ul.addEventListener("click", function(event){
+        if(event.target.innerText !== event.target.title) {
+            event.target.innerText = event.target.title
+        }
+
         document.querySelector(".galleryName").scrollIntoView(true);
         
     })
